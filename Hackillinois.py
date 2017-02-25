@@ -1,16 +1,27 @@
-import base64
-
 from pandas import json
-
 from flask import Flask
-
+from requests.auth import HTTPBasicAuth
+import base64
 import pprint
-
 import requests
 
-from requests.auth import HTTPBasicAuth
-
 app = Flask(__name__)
+
+
+def process_response(data_dict):
+	response_data = []
+	categories = data_dict['Categories']
+
+	for category in categories:
+		new_data = {}
+		curr_problem = category['Problems'][0]
+		curr_problem = curr_problem['Details']
+		new_data['CategoryTitle'] = curr_problem['CategoryTitle']
+		new_data['ICD10'] = curr_problem['ICD10']
+		new_data['IMO'] = curr_problem['IMO']
+		response_data.append(new_data)
+
+	return response_data
 
 
 @app.route('/')
@@ -20,7 +31,12 @@ def hello_world():
     payload = {"Problems": [{"FreeText": "runny nose"}, {"FreeText": "cold"}]}
     api_URL = 'https://ipl-nonproduction-customer_validation.e-imo.com/api/v3/actions/categorize'
     r = requests.post(api_URL, auth=HTTPBasicAuth(api_key, api_sec), json=payload)
-    print pprint.pprint(r.json())
+    
+    response_data = process_response(r.json())
+
+    pprint.pprint(response_data)
+
+
 
     return 'Hello World!'
 
