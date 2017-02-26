@@ -81,7 +81,6 @@ def get_doctors_from_response(response_data):
 			category_to_docs[category_name].append(doc_name[0])
 		doctors.append(category_to_docs)
 
-	pprint.pprint(doctors)
 	return doctors
 
 def make_imo_categories_request(symptoms):
@@ -98,7 +97,7 @@ def make_imo_categories_request(symptoms):
     response_data = process_response(r.json())
 
     doctors = get_doctors_from_response(response_data)
-    return 
+    return doctors
 
 
 @app.route('/', methods=['GET', 'POST'])
