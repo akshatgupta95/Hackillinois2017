@@ -82,7 +82,7 @@
                     {{ result[0] }}
               </div>
               <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">Send Symptoms to Doctors</a>
+                <a href="#" class="mdl-button", onclick="myFunction();">Send Symptoms to Doctors</a>
               </div>
             </div>
                {% endfor %}
@@ -90,3 +90,9 @@
     </div>
   </body>
 </html>
+
+<script>
+    function myFunction(){
+        alert("Data Sent to the Doctors");
+    }
+</script>

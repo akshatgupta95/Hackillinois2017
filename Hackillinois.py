@@ -14,6 +14,9 @@ app = Flask(__name__)
 
 app.database = "doctors.db"
 
+responseVal = []
+
+
 def process_response(data_dict):
     response_data = []
     categories = data_dict['Categories']
@@ -93,9 +96,13 @@ def make_imo_categories_request(symptoms):
     api_URL = 'https://ipl-nonproduction-customer_validation.e-imo.com/api/v3/actions/categorize'
     r = requests.post(api_URL, auth=HTTPBasicAuth(api_key, api_sec), json=payload)
 
+    global responseVal
+
     response_data = process_response(r.json())
 
     doctors = get_doctors_from_response(response_data)
+
+    responseVal = response_data
 
     return doctors
 
@@ -106,7 +113,7 @@ def index():
     return render_template('test.html')
 
 
-@app.route('/doctor_list', methods=['GET','POST'])
+@app.route('/doctor_list', methods=['GET', 'POST'])
 def doctor_list():
     jsdata = request.form.listvalues()
     symptoms = jsdata[0]
@@ -114,6 +121,12 @@ def doctor_list():
     docs = doctors
     print doctors
     return render_template('doctors.html', doc=docs)
+
+
+@app.route('/doctor', methods=['GET', 'POST'])
+def doctor():
+    print responseVal
+    return render_template("doc_dashboard.html", res=responseVal)
 
 
 def connect_db():
