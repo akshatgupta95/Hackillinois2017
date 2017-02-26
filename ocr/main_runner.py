@@ -34,17 +34,9 @@ def detect_text(path):
 	image = vision_client.image(content=content)
 
 	texts = image.detect_text()
-	print('Texts:')
-	# for text in texts:
-	#     # print(text.description)
-	#     # split = 
-	#     if (len(text.description) != 0):
-	#     	print(text.description)
-
 	result = [text.description for text in texts]
 	index_medicine = result.index("Medicine:")
 	result = result[index_medicine:]
-	print(result)
 
 	return result
 
