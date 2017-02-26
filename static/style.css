@@ -1,8 +1,22 @@
  .symp{
      margin: 15px;
+     padding: 10px;
+     padding-right: 20px;
+     border-radius: 15px;
+     box-shadow: 2px 2px 2px #888888;
  }
 
+ #close{
+     margin: 5px;
+
+ }
  #heading{
      text-align: center;
      padding-bottom: 5px;
+ }
+
+ #adds{
+     background-color: green;
+     outline-color: green;
+     box-shadow: 2px 2px 2px #888888;
  }
