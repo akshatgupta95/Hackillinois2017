@@ -1,6 +1,7 @@
 from pandas import json
 from flask import Flask
 from flask import render_template
+from flask import request
 from flask import g
 from requests.auth import HTTPBasicAuth
 import base64
@@ -85,6 +86,11 @@ def index():
     symptopms = ['runny nose', 'cold']
     make_imo_categories_request(symptopms)
     return render_template('test.html')
+
+@app.route('/doctor_list', methods=['GET', 'POST'])
+def doctor_list():
+    jsdata = request.request.form.listvalues()
+    return jsdata[0]
 
 def connect_db():
     return sl.connect(app.database)

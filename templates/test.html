@@ -7,10 +7,10 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../static/style.css" media="screen" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/style.css" media="screen" />
 </head>
 <body>
 
@@ -21,22 +21,22 @@
         </div>
 
     </nav>
-    <form action="" method="post">
+    <form method="post" name = "data" action="">
         <div class="ui-widget">
             <label for="tags">Symptom Input: </label>
             <input class="form-control autocomplete" id="tags" placeholder="Please input">
             <br>
-            <button id="add" type="button" class="btn btn-primary" onclick="makeButton()"> Add </button>
+            <button id="adds" type="button" class="btn btn-primary" onclick="makeButton()"> Add </button>
+            <button id="submit" type="submit" class="btn btn-primary" onclick="sendData()"> Submit </button>
+            
         </div>
-         <button name="foo" value="upvote" type="submit" onClick="sendData()">Submit</button>
-        </form>
+    </form>
 
 </div>
 </body>
 </html>
 
 <script>
-
     var symptoms = [];
     $( function() {
         var availableTags = [
@@ -96,23 +96,23 @@
             source: availableTags
         });
     } );
+
     function makeButton() {
         value = document.getElementById("tags").value;
         var b = document.createElement("BUTTON");
         var t = document.createTextNode(value);
         symptoms.push(value);
-        {{ sym}}.push(value);
-        alert({{ sym }});
         console.log(symptoms);
         b.setAttribute("id", "symp");
         b.setAttribute("class", "symp")
         b.appendChild(t);
         document.body.appendChild(b);
+        $("#tags").val("");
     }
-
+    
     function sendData() {
-        $.post( "/doctor_list", {
-            data: symptoms
-        });
+     $.post( "/doctor_list", {
+        data: symptoms
+    });
     }
 </script>
