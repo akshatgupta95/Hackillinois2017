@@ -26,6 +26,7 @@ def process_response(data_dict):
         new_data['CategoryTitle'] = curr_problem['CategoryTitle']
         new_data['ICD10'] = curr_problem['ICD10']
         new_data['IMO'] = curr_problem['IMO']
+        new_data['IMOTitle'] = curr_problem['IMOTitle']
         response_data.append(new_data)
 
     return response_data
@@ -58,11 +59,30 @@ def setup_doctor_database():
         doctor_name = doctor_names[i % len(doctor_names)]
         params = (category, doctor_name)
         curr.execute("INSERT INTO category_doctor VALUES (?, ?)", params)
+        doctor_name = doctor_names[(i+1) % len(doctor_names)]
+        params = (category, doctor_name)
+        curr.execute("INSERT INTO category_doctor VALUES (?, ?)", params)
         g.db.commit()
 
     curr.close()
     print ('Created Table')
 
+def get_doctors_from_response(response_data):
+	doctors = []
+	g.db = connect_db()
+	c = g.db.cursor()
+
+	for data in response_data:
+		category_name = data['CategoryTitle']
+		category_to_docs = {category_name : []}
+		query = "SELECT doctor FROM category_doctor WHERE category=\'%s\'" % category_name
+		cur = c.execute(query)
+		for doc_name in cur.fetchall():
+			category_to_docs[category_name].append(doc_name[0])
+		doctors.append(category_to_docs)
+
+	pprint.pprint(doctors)
+	return doctors
 
 def make_imo_categories_request(symptoms):
     api_key = 'b954cfcb00914f98a08be7cbfb51d0a2'
@@ -77,8 +97,8 @@ def make_imo_categories_request(symptoms):
 
     response_data = process_response(r.json())
 
-    pprint.pprint(response_data)
-    return
+    doctors = get_doctors_from_response(response_data)
+    return 
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -90,8 +110,7 @@ def index():
 def doctor_list():
     jsdata = request.form.listvalues()
     symptoms = jsdata[0]
-    print (symptoms)
-    make_imo_categories_request(symptoms)
+    doctors = make_imo_categories_request(symptoms)
     return 'Hello World'
 
 def connect_db():
