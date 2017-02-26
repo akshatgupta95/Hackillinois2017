@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
@@ -21,12 +22,15 @@
         </div>
 
     </nav>
-    <div class="ui-widget">
-        <label for="tags">Symptom Input: </label>
-        <input class="form-control autocomplete" id="tags" placeholder="Please input">
-        <br>
-        <button id="add" type="button" class="btn btn-primary" onclick="makeButton()"> Add </button>
-    </div>
+    <form method="post" action="/home">
+        <div class="ui-widget">
+            <label for="tags">Symptom Input: </label>
+            <input class="form-control autocomplete" id="tags" placeholder="Please input">
+            <br>
+            <button id="add" type="button" class="btn btn-primary" onclick="makeButton()"> Add </button>
+        </div>
+    </form>
+
 </div>
 </body>
 </html>
@@ -93,8 +97,9 @@
     function makeButton() {
         value = document.getElementById("tags").value;
         var b = document.createElement("BUTTON");
-        console.log("here");
         var t = document.createTextNode(value);
+        b.setAttribute("id", "symp");
+        b.setAttribute("class", "symp")
         b.appendChild(t);
         document.body.appendChild(b);
     }
