@@ -10,6 +10,8 @@ import requests
 
 import sqlite3 as sl
 
+from ocr.main_runner import main
+
 app = Flask(__name__)
 
 app.database = "doctors.db"
@@ -116,17 +118,23 @@ def index():
 @app.route('/doctor_list', methods=['GET', 'POST'])
 def doctor_list():
     jsdata = request.form.listvalues()
-    symptoms = jsdata[0]
+    jsdata = [key for key in jsdata][0]
+    symptoms = jsdata
     doctors = make_imo_categories_request(symptoms)
     docs = doctors
-    print doctors
+    print (doctors)
     return render_template('doctors.html', doc=docs)
 
 
 @app.route('/doctor', methods=['GET', 'POST'])
 def doctor():
-    print responseVal
+    print (responseVal)
     return render_template("doc_dashboard.html", res=responseVal)
+
+@app.route('/send_file', methods=['GET', 'POST'])
+def send_file():
+    main()
+    return "Your patient's calendar is updated!"
 
 
 def connect_db():

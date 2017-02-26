@@ -84,7 +84,7 @@
 
                         <br>
                          {% for result in res %}
-                            {%  for key,value in result.iteritems() %}
+                            {%  for key,value in result.items() %}
                         <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
                                 <b>{{  key }}</b> : {{ value }}
                         </div>
@@ -95,7 +95,7 @@
                         {% endfor %}
                     </div>
                     <div class="mdl-card__actions">
-                        <form id="upload" style="display: none; margin-left: 80%" action="/action_page.php" >
+                        <form id="upload" style="display: none; margin-left: 80%" action="/send_file" >
                             <input type="file" name="pic" accept="image/*">
                             <input type="submit">
                         </form>

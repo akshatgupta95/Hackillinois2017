@@ -22,7 +22,7 @@ except ImportError:
 # __________________ Google Cloud Vision API OCR ___________
 
 
-IMAGE_PATH = 'test.png'
+IMAGE_PATH = '/Users/akshungupta/git/Hackillinois2017/ocr/test.png'
 
 def detect_text(path):
 	"""Detects text in the file."""
@@ -136,7 +136,7 @@ def main():
 	events = get_events(words_in_file)
 	events_calendar = create_event_dicts(events) # list of events to be passed into google calendar api 
 	add_calendar_events(events_calendar)
-	print("Your prescriptions will be ")
+	print("Your prescriptions will be uploaded to your calendar!")
 
-if __name__ == '__main__':
-	main()
+# if __name__ == '__main__':
+# 	main()

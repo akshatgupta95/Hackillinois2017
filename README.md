@@ -26,9 +26,6 @@ A platform to connect patients and doctors to facilitate self care
   * Handwriting detection to increase usability
   * Addition chat system
 
-## [INTERFACES] _(if applicable)_ 
-
-## OTHER SOURCES OF DOCUMENTATION
 
 ## License 
 
