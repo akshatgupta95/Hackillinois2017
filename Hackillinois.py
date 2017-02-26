@@ -64,13 +64,13 @@ def setup_doctor_database():
     print ('Created Table')
 
 
-def make_imo_categories_request(symptopms):
+def make_imo_categories_request(symptoms):
     api_key = 'b954cfcb00914f98a08be7cbfb51d0a2'
     api_sec = '5E5FCD8E015DCCD7D3B252B1C58447E0A7B6155646643983C8BE8E97D2B6ADF9'
     payload = {'Problems': []}
-    for symptopm in symptopms:
+    for symptom in symptoms:
         payload['Problems'].append(
-            {'FreeText': symptopm}
+            {'FreeText': symptom}
         )
     api_URL = 'https://ipl-nonproduction-customer_validation.e-imo.com/api/v3/actions/categorize'
     r = requests.post(api_URL, auth=HTTPBasicAuth(api_key, api_sec), json=payload)
@@ -78,19 +78,21 @@ def make_imo_categories_request(symptopms):
     response_data = process_response(r.json())
 
     pprint.pprint(response_data)
+    return
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     setup_doctor_database()
-    symptopms = ['runny nose', 'cold']
-    make_imo_categories_request(symptopms)
     return render_template('test.html')
 
 @app.route('/doctor_list', methods=['GET', 'POST'])
 def doctor_list():
-    jsdata = request.request.form.listvalues()
-    return jsdata[0]
+    jsdata = request.form.listvalues()
+    symptoms = jsdata[0]
+    print (symptoms)
+    make_imo_categories_request(symptoms)
+    return 'Hello World'
 
 def connect_db():
     return sl.connect(app.database)
