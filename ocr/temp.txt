@@ -1,0 +1,2 @@
+Texts:
+['Medicine: Advil\nStart Date: 03/01/2017\nEndDate: 03/08/2017\nFrequency: Daily\nMedicine: Hersheys\nStart Date: 03/01/2017\nEndDate: 03/15/2017\nFrequency: Weekly\nDr. Lal Pathlabs\nArun Kapoor 26/2/17\n', 'Medicine:', 'Advil', 'Start', 'Date:', '03/01/2017', 'EndDate:', '03/08/2017', 'Frequency:', 'Daily', 'Medicine:', 'Hersheys', 'Start', 'Date:', '03/01/2017', 'EndDate:', '03/15/2017', 'Frequency:', 'Weekly', 'Dr.', 'Lal', 'Pathlabs', 'Arun', 'Kapoor', '26/2/17']
