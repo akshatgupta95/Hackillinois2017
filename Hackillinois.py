@@ -53,12 +53,14 @@ def setup_doctor_database():
     curr.close()
     print ('Created Table')
 
-@app.route('/')
-def hello_world():
-    setup_doctor_database()
+def make_imo_categories_request(symptopms):
     api_key = 'b954cfcb00914f98a08be7cbfb51d0a2'
     api_sec = '5E5FCD8E015DCCD7D3B252B1C58447E0A7B6155646643983C8BE8E97D2B6ADF9'
-    payload = {"Problems": [{"FreeText": "runny nose"}, {"FreeText": "cold"}]}																																																																																																																																																																																							
+    payload = {'Problems' : []}
+    for symptopm in symptopms:
+    	payload['Problems'].append(
+    		{'FreeText' : symptopm}
+    	)
     api_URL = 'https://ipl-nonproduction-customer_validation.e-imo.com/api/v3/actions/categorize'
     r = requests.post(api_URL, auth=HTTPBasicAuth(api_key, api_sec), json=payload)
 
@@ -67,6 +69,11 @@ def hello_world():
     pprint.pprint(response_data)
 
 
+@app.route('/')
+def index():
+    setup_doctor_database()
+    symptopms = ['runny nose', 'cold']
+    make_imo_categories_request(symptopms)
 
     return 'Hello World!'
 
