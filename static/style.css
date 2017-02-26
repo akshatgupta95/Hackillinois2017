@@ -12,11 +12,46 @@
  }
  #heading{
      text-align: center;
-     padding-bottom: 5px;
+     padding-bottom: 1%;
+     font-family: Copperplate Gothic Light;
+     font-size: 5em;
+     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
  }
 
  #adds{
      background-color: green;
      outline-color: green;
      box-shadow: 2px 2px 2px #888888;
+     color: darkgrey;
+     width: 15%;
+     height: 10%;
+     float: left;
  }
+
+ #submit{
+     background-color: orange;
+     outline-color: orange;
+     box-shadow: 2px 2px 2px #888888;
+     color: darkblue;
+     width: 15%;
+     height: 10%;
+     margin-left: 70%;
+
+ }
+
+ form{
+     width: 50%;
+     margin-top: 40%;
+     margin: auto;
+ }
+
+ body {
+     background-image: url("docimage.jpeg");
+     background-color: #cccccc;
+     background-size: cover;
+ }
+
+
+
+
