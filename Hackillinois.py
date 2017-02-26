@@ -1,6 +1,11 @@
+import base64
+
 from pandas import json
+
 from flask import Flask
+
 from flask import render_template
+<<<<<<< Updated upstream
 from flask import g
 from requests.auth import HTTPBasicAuth
 import base64
@@ -13,22 +18,20 @@ app = Flask(__name__)
 
 app.database = "doctors.db"
 
+=======
 
-def process_response(data_dict):
-	response_data = []
-	categories = data_dict['Categories']
+import pprint
 
-	for category in categories:
-		new_data = {}
-		curr_problem = category['Problems'][0]
-		curr_problem = curr_problem['Details']
-		new_data['CategoryTitle'] = curr_problem['CategoryTitle']
-		new_data['ICD10'] = curr_problem['ICD10']
-		new_data['IMO'] = curr_problem['IMO']
-		response_data.append(new_data)
+from flask import request
+>>>>>>> Stashed changes
 
-	return response_data
+import requests
 
+from requests.auth import HTTPBasicAuth
+
+app = Flask(__name__)
+
+<<<<<<< Updated upstream
 def setup_doctor_database():
     doctor_names = [
         "Tracey Coleman","Katherine Wright","David Lewis","David Oliver","Ian Butler","Joan Forsyth","Chloe Mitchell","Nicola Clark","Lauren McGrath","Victoria Lewis","Carolyn Paige","Katherine Sutherland","Joshua Hughes","Ian Young","Jonathan Abraham"
@@ -54,6 +57,12 @@ def setup_doctor_database():
     print ('Created Table')
 
 def make_imo_categories_request(symptopms):
+=======
+symptoms = []
+
+@app.route('/', methods=['GET', 'POST'])
+def hello_world():
+>>>>>>> Stashed changes
     api_key = 'b954cfcb00914f98a08be7cbfb51d0a2'
     api_sec = '5E5FCD8E015DCCD7D3B252B1C58447E0A7B6155646643983C8BE8E97D2B6ADF9'
     payload = {'Problems' : []}
@@ -63,6 +72,7 @@ def make_imo_categories_request(symptopms):
     	)
     api_URL = 'https://ipl-nonproduction-customer_validation.e-imo.com/api/v3/actions/categorize'
     r = requests.post(api_URL, auth=HTTPBasicAuth(api_key, api_sec), json=payload)
+<<<<<<< Updated upstream
 
     response_data = process_response(r.json())
 
@@ -76,7 +86,15 @@ def index():
     make_imo_categories_request(symptopms)
 
     return 'Hello World!'
+=======
+    #print pprint.pprint(r.json())
+    return render_template('test.html', sym=symptoms)
+>>>>>>> Stashed changes
 
+@app.route('/doctor_list', methods=['GET', 'POST'])
+def doc():
+    jsdata = request.form['data']
+    print jsdata
 
 def connect_db():
 	return sl.connect(app.database)

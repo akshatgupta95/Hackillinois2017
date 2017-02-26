@@ -22,20 +22,23 @@
         </div>
 
     </nav>
-    <form method="post" action="/home">
+    <form action="" method="post">
         <div class="ui-widget">
             <label for="tags">Symptom Input: </label>
             <input class="form-control autocomplete" id="tags" placeholder="Please input">
             <br>
             <button id="add" type="button" class="btn btn-primary" onclick="makeButton()"> Add </button>
         </div>
-    </form>
+         <button name="foo" value="upvote" type="submit" onClick="sendData()">Submit</button>
+        </form>
 
 </div>
 </body>
 </html>
 
 <script>
+
+    var symptoms = [];
     $( function() {
         var availableTags = [
             "Abdominal bloating",
@@ -98,9 +101,19 @@
         value = document.getElementById("tags").value;
         var b = document.createElement("BUTTON");
         var t = document.createTextNode(value);
+        symptoms.push(value);
+        {{ sym}}.push(value);
+        alert({{ sym }});
+        console.log(symptoms);
         b.setAttribute("id", "symp");
         b.setAttribute("class", "symp")
         b.appendChild(t);
         document.body.appendChild(b);
+    }
+
+    function sendData() {
+        $.post( "/doctor_list", {
+            data: symptoms
+        });
     }
 </script>
