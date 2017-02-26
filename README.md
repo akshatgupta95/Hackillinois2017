@@ -24,7 +24,7 @@ A platform to connect patients and doctors to facilitate self care
 ## Bugs/Future Work
   * OCR is not perfect. Need data in given format
   * Handwriting detection to increase usability
-  * Addition chat system
+  * Add chat system between doctors and patients
 
 
 ## License 
