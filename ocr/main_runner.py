@@ -22,7 +22,7 @@ except ImportError:
 # __________________ Google Cloud Vision API OCR ___________
 
 
-IMAGE_PATH = '/Users/akshungupta/git/Hackillinois2017/ocr/test.png'
+IMAGE_PATH = 'test.png'
 
 def detect_text(path):
 	"""Detects text in the file."""
